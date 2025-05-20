@@ -40,6 +40,7 @@ module "alb" {
   
   app_port          = var.app_port
   health_check_path = var.health_check_path
+  allowed_cidr_blocks = var.allowed_ip_ranges
 }
 
 # ECS Task Definition for Traccar
@@ -74,12 +75,14 @@ module "ecs_service" {
   container_name      = module.ecs_task.container_name
   
   vpc_id             = data.terraform_remote_state.shared.outputs.vpc_id
-  subnets            = data.terraform_remote_state.shared.outputs.private_subnets
+  subnets            = data.terraform_remote_state.shared.outputs.public_subnets
   app_port           = var.app_port
   target_group_arn   = module.alb.target_group_arn
   desired_count      = var.desired_count
   min_capacity       = var.desired_count
   max_capacity       = var.max_capacity
+  alb_security_group_id = module.alb.security_group_id
+  assign_public_ip   = true
   
   create_security_group = true
 }

@@ -51,3 +51,9 @@ variable "max_capacity" {
   type        = number
   default     = 1
 }
+
+variable "allowed_ip_ranges" {
+  description = "List of CIDR blocks allowed to access the ALB"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]  # Open to all by default, restrict in production
+}
