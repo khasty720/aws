@@ -11,11 +11,11 @@ resource "aws_security_group" "ecs_tasks" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port   = var.app_port
-    to_port     = var.app_port
-    protocol    = "tcp"
-    description = "Allow inbound traffic to application port"
-    cidr_blocks = var.security_group_ingress_cidr
+    from_port       = var.app_port
+    to_port         = var.app_port
+    protocol        = "tcp"
+    description     = "Allow inbound traffic from ALB only"
+    security_groups = var.alb_security_group_id != "" ? [var.alb_security_group_id] : null
   }
 
   egress {

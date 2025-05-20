@@ -97,3 +97,9 @@ variable "security_group_ingress_cidr" {
   type        = list(string)
   default     = ["0.0.0.0/0"]
 }
+
+variable "alb_security_group_id" {
+  description = "Security group ID of the ALB to restrict inbound traffic"
+  type        = string
+  default     = ""
+}
