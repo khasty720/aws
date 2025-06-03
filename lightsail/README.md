@@ -1,4 +1,4 @@
-### AWS Llightsail Module
+### AWS Lightsail Module
 
 ### Stack
 
