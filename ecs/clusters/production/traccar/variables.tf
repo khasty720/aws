@@ -23,9 +23,15 @@ variable "health_check_path" {
 }
 
 variable "container_image" {
-  description = "Docker image to deploy (e.g., traccar/traccar:latest)"
+  description = "Docker image to deploy (e.g., khasty720/traccar:latest)"
   type        = string
-  default     = "traccar/traccar:latest"
+  default     = "khasty720/traccar:latest"
+}
+
+variable "container_cpu_architecture" {
+  description = "CPU architecture for the container (e.g., ARM64, X86_64)"
+  type        = string
+  default     = "X86_64"
 }
 
 variable "container_cpu" {
@@ -55,5 +61,11 @@ variable "max_capacity" {
 variable "allowed_ip_ranges" {
   description = "List of CIDR blocks allowed to access the ALB"
   type        = list(string)
-  default     = ["0.0.0.0/0"]  # Open to all by default, restrict in production
+  default     = ["98.218.64.97/32"]  # Restricted to specific IP address
+}
+
+variable "certificate_arn" {
+  description = "ARN of the SSL certificate for HTTPS"
+  type        = string
+  default     = "arn:aws:acm:us-east-2:987626324803:certificate/3ef26ec5-8ea8-4d25-8f86-56db8542f4cf"
 }

@@ -41,6 +41,7 @@ module "alb" {
   app_port          = var.app_port
   health_check_path = var.health_check_path
   allowed_cidr_blocks = var.allowed_ip_ranges
+  certificate_arn   = var.certificate_arn
 }
 
 # ECS Task Definition for Traccar
@@ -55,11 +56,20 @@ module "ecs_task" {
   container_memory   = var.container_memory
   log_group_name     = data.terraform_remote_state.shared.outputs.log_group_name
   execution_role_arn = data.terraform_remote_state.shared.outputs.execution_role_arn
+  cpu_architecture   = var.container_cpu_architecture
   
   environment_variables = [
     {
       name  = "APP_ENV"
       value = var.environment
+    },
+    {
+      name  = "CONFIG_USE_ENVIRONMENT_VARIABLES"
+      value = "true"
+    },
+    {
+      name  = "LOGGER_LEVEL"
+      value = "info"
     }
   ]
 }
