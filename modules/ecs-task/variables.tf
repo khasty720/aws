@@ -61,3 +61,13 @@ variable "secrets" {
   }))
   default     = []
 }
+
+variable "cpu_architecture" {
+  description = "CPU architecture for the task (X86_64 or ARM64)"
+  type        = string
+  default     = "X86_64"
+  validation {
+    condition     = contains(["X86_64", "ARM64"], var.cpu_architecture)
+    error_message = "The cpu_architecture must be either X86_64 or ARM64."
+  }
+}
