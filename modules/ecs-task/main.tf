@@ -25,6 +25,12 @@ resource "aws_ecs_task_definition" "app" {
   execution_role_arn       = var.execution_role_arn
   task_role_arn            = var.task_role_arn != "" ? var.task_role_arn : null
 
+  # Set the CPU architecture (ARM64 or X86_64)
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture        = var.cpu_architecture
+  }
+
   container_definitions = jsonencode([
     {
       name        = local.container_name

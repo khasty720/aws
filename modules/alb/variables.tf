@@ -33,3 +33,9 @@ variable "allowed_cidr_blocks" {
   type        = list(string)
   default     = ["0.0.0.0/0"]
 }
+
+variable "certificate_arn" {
+  description = "ARN of the SSL certificate for HTTPS"
+  type        = string
+  default     = ""  # Optional, can be set if using HTTPS
+}
