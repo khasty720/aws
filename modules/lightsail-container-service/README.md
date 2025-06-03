@@ -24,7 +24,6 @@ module "lightsail_container_service" {
   containers = [
     {
       name  = "my-app"
-      name  = "my-app"
       image = "your-dockerhub-username/your-image:latest"
       ports = {
         "80" = "HTTP"
